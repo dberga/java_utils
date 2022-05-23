@@ -1,0 +1,21 @@
+Phase: OneText
+Input: Token
+Options: control=once
+
+
+Rule: text
+
+({Token}):annotate
+-->
+{
+Long start=inputAS.firstNode().getOffset();
+Long end  =inputAS.lastNode().getOffset();
+try {
+   outputAS.add(start,end,"TEXT",Factory.newFeatureMap());
+} catch(InvalidOffsetException ioe) {
+
+
+}
+
+
+}

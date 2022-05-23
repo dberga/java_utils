@@ -1,0 +1,962 @@
+<CREOLE-DIRECTORY>
+
+<CREOLE>
+
+
+
+<RESOURCE>
+    <NAME>SUMMA Vanilla MultiDoc Summarizer PR</NAME>
+    <CLASS>summa.applications.SummaVanillaMultiDocPR</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+<PARAMETER NAME="listOfGapps" RUNTIME="flase"  DEFAULT="basicAnalyzer=BASIC-SENTENCE-ANALYSIS-I.gapp;statisticalAnalyzer=BASIC-SENTENCE-ANALYSIS-II.gapp;centroidComputation=CENTROID-COMPUTATION.gapp;centroidSentSim=SENTENCE-CENTROID-SIM.gapp;multiDocScorer=MULTI-DOC-SENTENCE-SCORER.gapp;generateSummary=GENERATE-MULTI-DOC-SUM.gapp">java.lang.String</PARAMETER>
+<PARAMETER NAME="gappsDir" RUNTIME="flase"  DEFAULT="gapps">java.lang.String</PARAMETER>
+  <PARAMETER NAME="corpus"
+      COMMENT="The corpus with the muti-doc summary"
+       RUNTIME="true">gate.Corpus</PARAMETER>
+    <PARAMETER NAME="sumFeatures" DEFAULT="tf_score;position_score;first_sim;sent_doc_sim;centroid_sim" RUNTIME="true" OPTIONAL="true">java.util.ArrayList</PARAMETER>
+    <PARAMETER NAME="sumWeigths"  RUNTIME="true"
+	DEFAULT="0.0;0.0;0.0;1.0;1.0"	 OPTIONAL="true">java.util.ArrayList</PARAMETER>
+<PARAMETER NAME="basicAnalyzer" DEFAULT="" RUNTIME="true"
+           OPTIONAL="false">gate.CorpusController</PARAMETER>
+<PARAMETER NAME="statisticalAnalyzer" DEFAULT="" RUNTIME="true"
+           OPTIONAL="false">gate.CorpusController</PARAMETER>
+
+<PARAMETER NAME="centroidComputation" DEFAULT="" RUNTIME="true"
+           OPTIONAL="false">gate.creole.SerialController</PARAMETER>
+
+<PARAMETER NAME="centroidSentSim" DEFAULT="" RUNTIME="true"
+           OPTIONAL="false">gate.creole.SerialController</PARAMETER>
+<PARAMETER NAME="multiDocScorer" DEFAULT="" RUNTIME="true"
+           OPTIONAL="false">gate.CorpusController</PARAMETER>
+
+<PARAMETER NAME="generateSummary" DEFAULT="" RUNTIME="true"
+           OPTIONAL="false">gate.creole.SerialController</PARAMETER>
+
+<PARAMETER NAME="sentCompression" RUNTIME="true"  DEFAULT="true">java.lang.Boolean</PARAMETER>
+<PARAMETER NAME="compression" RUNTIME="true" DEFAULT="10">java.lang.Integer</PARAMETER>
+
+
+</RESOURCE>
+
+
+<RESOURCE>
+    <NAME>SUMMA Paragraph Summarizer</NAME>
+    <CLASS>summa.summarizer.ParagraphSummarizer</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+
+  <PARAMETER NAME="annSetName"
+      COMMENT="The Annotation Set"
+      DEFAULT="DESCRIPTION"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="outAnnSet"
+      COMMENT="Paragraph Summary"
+      DEFAULT="PARAGRAPH-SUMMARY"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="parAnn"
+      COMMENT="Paragraph annotation"
+      DEFAULT="paragraph"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="compression"
+      COMMENT="Compression"
+      DEFAULT="10"
+      RUNTIME="true">java.lang.Integer</PARAMETER>
+</RESOURCE>
+
+<RESOURCE>
+ <NAME>SUMMA Multi-Extract Exporter</NAME>
+    <CLASS>summa.summarizer.ExportMultiDocumentSummary</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="corpus"
+      COMMENT="The corpus with the muti-doc summary"
+       RUNTIME="true">gate.Corpus</PARAMETER>
+  <PARAMETER NAME="dirName"
+      COMMENT="Where to export the summaries?"
+      RUNTIME="true">java.io.File</PARAMETER>
+<PARAMETER NAME="annotationSet"
+      COMMENT="What annotation set to extract from?"
+      DEFAULT="MULTI-EXTRACT"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="annotationType"
+      COMMENT="What annotation want to extract?"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="summaryName"
+      COMMENT="Name of the multi-document summary"
+      DEFAULT="mds.txt"
+      RUNTIME="true">java.lang.String</PARAMETER>
+</RESOURCE>
+
+
+<RESOURCE>
+    <NAME>SUMMA Sent/Sent Similarity</NAME>
+    <CLASS>summa.scorer.SentenceSentenceSim</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+
+  <PARAMETER NAME="annSet"
+      COMMENT="The Annotation Set"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="vecAnn"
+      COMMENT="Vector name"
+      DEFAULT="Vector_Norm"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+  </RESOURCE>
+
+
+
+
+<RESOURCE>
+    <NAME>SUMMA Simple Multi-document Summarizer</NAME>
+    <CLASS>summa.mds.SimpleMultiDocumentSummarizer</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="corpus"
+      COMMENT="The corpus to be analysed"
+      RUNTIME="true">gate.Corpus</PARAMETER>
+<PARAMETER NAME="compression" 
+DEFAULT="20" RUNTIME="true" 
+OPTIONAL="true">java.lang.Integer</PARAMETER>
+
+
+<PARAMETER NAME="thresholdSim" 
+DEFAULT="0.05" RUNTIME="true" 
+OPTIONAL="true">java.lang.Double</PARAMETER>
+
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="tokenAnn"
+      COMMENT="Token annotation"
+      DEFAULT="Token"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="vectorName"
+      COMMENT="Vector name"
+      DEFAULT="Vector_Norm"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="newDocument"
+      COMMENT="Generate new document"
+      DEFAULT="true"
+      RUNTIME="true">java.lang.Boolean</PARAMETER>
+
+<PARAMETER NAME="sumSetName"
+      COMMENT="Summary annotation set"
+      DEFAULT="MULTI-EXTRACT"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="sentCompression"
+      COMMENT="Sentence compression"
+      DEFAULT="true"
+      RUNTIME="true">java.lang.Boolean</PARAMETER>
+
+<PARAMETER NAME="annSet"
+      COMMENT="Annotation set with sentences"
+      DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="removeRedundancy"
+      COMMENT="Redundancy removal by cosine"
+      DEFAULT="true"
+      RUNTIME="true">java.lang.Boolean</PARAMETER>
+</RESOURCE>
+
+
+<RESOURCE>
+    <NAME>SUMMA Centroid Sentence Similarity</NAME>
+    <CLASS>summa.mds.DocumentCentroidSimilarity</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="corpus"
+      COMMENT="The corpus to be analysed"
+      RUNTIME="true">gate.Corpus</PARAMETER>
+
+<PARAMETER NAME="annSet"
+      COMMENT="The input annotation set"
+      DEFAULT=""
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentVec"
+      COMMENT="Sentence vector"
+      DEFAULT="Vector_Norm"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="centroid"
+      COMMENT="Cluster centroid"
+      DEFAULT="centroid"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+     </RESOURCE>
+  
+
+<RESOURCE>
+ <NAME>SUMMA Centroid Computation</NAME>
+    <CLASS>summa.mds.CentroidComputation</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="corpus"
+      COMMENT="The corpus with the cluster of documents"
+      RUNTIME="true">gate.Corpus</PARAMETER>
+<PARAMETER NAME="annSet"
+      COMMENT="The input annotation set"
+      DEFAULT=""
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="vecName"
+      COMMENT="The document vector"
+      DEFAULT="Vector_Norm"
+      RUNTIME="true">java.lang.String</PARAMETER>
+</RESOURCE>
+
+<RESOURCE>
+      <NAME>SUMMA Rouge Evaluation</NAME>
+      <CLASS>summa.evaluation.rouge.RougeEval</CLASS>
+      <JAR>Summa_UPF.jar</JAR>
+      <COMMENT>Summarization Resources</COMMENT>
+      <PARAMETER NAME="document"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+<PARAMETER NAME="isExtract"
+      COMMENT="Document contains extract?" DEFAULT="true"
+      RUNTIME="true">java.lang.Boolean</PARAMETER>
+
+	<PARAMETER NAME="extractSet" DEFAULT="EXTRACT" RUNTIME="true" OPTIONAL="true">java.lang.String</PARAMETER>
+
+	<PARAMETER NAME="ngram" DEFAULT="1" RUNTIME="false" OPTIONAL="false">java.lang.Integer</PARAMETER>
+
+	  <PARAMETER NAME="idealCorpus"
+      RUNTIME="true">gate.Corpus</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+</RESOURCE>
+
+<!--<RESOURCE>
+ <NAME>SUMMA Rouge Evaluation</NAME>
+    <CLASS>summa.evaluation.rouge.RougeEval</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to process"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+ 
+<PARAMETER NAME="ngram"
+      COMMENT="The ngram to consider"
+      DEFAULT="1"
+       RUNTIME="true">java.lang.Integer</PARAMETER>
+<PARAMETER NAME="idealCorpus"
+      COMMENT="Reference Corpus"
+      RUNTIME="true">gate.corpora.CorpusImpl</PARAMETER>
+<PARAMETER NAME="isExtract"
+      COMMENT="Is an extract?"
+      DEFAULT="true"
+      RUNTIME="true">java.lang.Boolean</PARAMETER>
+<PARAMETER NAME="extractSet"
+      COMMENT="Extract annotation set"
+      DEFAULT="EXTRACT"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+</RESOURCE>-->
+
+<RESOURCE>
+ <NAME>SUMMA Normalize Vector</NAME>
+    <CLASS>summa.analyser.NormalizeVector</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to process"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+ 
+<PARAMETER NAME="annSet"
+      COMMENT="The input annotation set"
+      DEFAULT=""
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="vecAnn"
+      COMMENT="Vector annotation"
+      DEFAULT="Vector"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+</RESOURCE>
+<RESOURCE>
+    <NAME>SUMMA n-Grams</NAME>
+    <CLASS>summa.ngrams.ComputeNgrams</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+ <PARAMETER NAME="normalise"
+      COMMENT="lowercase?"
+      DEFAULT="true"
+      RUNTIME="true">java.lang.Boolean</PARAMETER>
+ <PARAMETER NAME="feature"
+      COMMENT="The string of the n-gram (string, root, stem, etc.)"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="inputAS"
+      COMMENT="The annotation set where to find the tokens"
+      DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="outputAS"
+      COMMENT="The annotation set where to put the n-grams"
+      DEFAULT="NGrams"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="annType"
+      COMMENT="The annotation type to compute the n-grams"
+      DEFAULT="Token"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="The sentence annotation"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="ngram" DEFAULT="1" RUNTIME="true" OPTIONAL="false">java.lang.Integer</PARAMETER>
+ 
+  </RESOURCE>
+
+
+<RESOURCE>
+    <NAME>SUMMA Semantic Scorer</NAME>
+    <CLASS>summa.scorer.SemanticScorer</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+<PARAMETER NAME="annSetName"
+      COMMENT="The input annotation set"
+      DEFAULT=""
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="semTypes" DEFAULT="Person;Location;Address;Organization;Date" RUNTIME="true" OPTIONAL="false">java.util.ArrayList</PARAMETER>
+ 
+  </RESOURCE>
+
+<RESOURCE>
+    <NAME>SUMMA CuePhrase Scorer</NAME>
+    <CLASS>summa.scorer.CuePhraseScorer</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+ <PARAMETER NAME="annSet"
+      COMMENT="Annotation Set"
+      DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="listLocation" RUNTIME="false" OPTIONAL="false">java.net.URL</PARAMETER>
+ 
+  </RESOURCE>
+
+<RESOURCE>
+    <NAME>SUMMA IDF Table</NAME>
+    <CLASS>summa.resources.frequency.InvertedTable</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="tableLocation"
+      COMMENT="location of table"
+      DEFAULT="resources/aquaint.idf"
+      RUNTIME="false">java.net.URL</PARAMETER>
+ <PARAMETER NAME="encoding"
+      COMMENT="table encoding"
+      DEFAULT="UTF-8"
+      RUNTIME="false">java.lang.String</PARAMETER>
+    <ICON>lr.gif</ICON>
+  </RESOURCE>
+
+<RESOURCE>
+ <NAME>SUMMA First Sentence Similarity</NAME>
+    <CLASS>summa.scorer.FirstSentenceSimilarity</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The input document"
+       RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+<PARAMETER NAME="annSetName"
+      COMMENT="The input annotation set"
+      DEFAULT=""
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="vecAnn"
+      COMMENT="Vector annotation"
+      DEFAULT="Vector_Norm"
+       RUNTIME="true">java.lang.String</PARAMETER>
+
+  
+</RESOURCE>
+
+
+
+<RESOURCE>
+ <NAME>SUMMA Sentence Document Similarity</NAME>
+    <CLASS>summa.scorer.SentenceDocumentSimilarity</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The input document"
+       RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+   
+ 
+<PARAMETER NAME="docVecName"
+     COMMENT="Name of Document Vector"
+     DEFAULT="ne_doc_vec_norm"
+      RUNTIME="true">java.lang.String</PARAMETER>
+ <PARAMETER NAME="sentAnnSet"
+      DEFAULT=""
+      COMMENT="The Annotation Set"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="vecAnn"
+      COMMENT="Vector annotation"
+      DEFAULT="Vector"
+       RUNTIME="true">java.lang.String</PARAMETER>
+
+</RESOURCE>
+   <RESOURCE>
+    <NAME>SUMMA Vector Computation</NAME>
+    <CLASS>summa.resources.frequency.VectorComputation</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+     <PARAMETER NAME="annSetName"
+     OPTIONAL="true"
+     DEFAULT=""
+     RUNTIME="true">java.lang.String</PARAMETER>
+    
+ <PARAMETER NAME="vecAnn"
+     OPTIONAL="true"
+     DEFAULT="Vector"
+     RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="tokenAnn"
+     OPTIONAL="false"
+     DEFAULT="Token"
+     RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="tokenFeature"
+     OPTIONAL="false"
+     DEFAULT="string"
+     RUNTIME="true">java.lang.String</PARAMETER>
+     <PARAMETER NAME="sentAnn"
+      DEFAULT="Sentence"
+      OPTIONAL="true"
+      RUNTIME="true">java.lang.String</PARAMETER>
+  <PARAMETER NAME="statistics"
+     OPTIONAL="false"
+     DEFAULT="token_tf_idf"
+     RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="encoding"
+     OPTIONAL="false"
+     DEFAULT="UTF-8"
+     RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="stopTag"
+     OPTIONAL="false"
+     DEFAULT="kind"
+     RUNTIME="false">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="stopFeature"
+     OPTIONAL="false"
+     DEFAULT="string"
+     RUNTIME="false">java.lang.String</PARAMETER>
+<PARAMETER NAME="lowercase"
+     OPTIONAL="false"
+     DEFAULT="true"
+     RUNTIME="false">java.lang.Boolean</PARAMETER>
+ 
+<PARAMETER NAME="stopTagLoc" 
+RUNTIME="false" 
+DEFAULT="resources/stop_kind.lst"
+OPTIONAL="false">java.net.URL</PARAMETER>
+
+<PARAMETER NAME="stopWordLoc" 
+RUNTIME="false" 
+DEFAULT="resources/stop_word.lst"
+OPTIONAL="false">java.net.URL</PARAMETER>
+ 
+
+
+  </RESOURCE> 
+<RESOURCE>
+    <NAME>SUMMA NEs Statistics</NAME>
+    <CLASS>summa.resources.frequency.NEFrequency</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+     <PARAMETER NAME="table"
+      COMMENT="The IDF table"
+      RUNTIME="true">summa.resources.frequency.InvertedTable</PARAMETER>
+ <PARAMETER NAME="annSet"
+     COMMENT="Annotation Set"
+     DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+  <PARAMETER NAME="annType"
+     COMMENT="Annotation Type"
+DEFAULT="Token"
+      RUNTIME="true">java.lang.String</PARAMETER>
+     <PARAMETER NAME="featureName"
+     COMMENT="the feature to be used in the annType"
+DEFAULT="string"
+      RUNTIME="true">java.lang.String</PARAMETER>
+ <PARAMETER NAME="sentAnn"
+     COMMENT="Sentence Annotation Name"
+DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="parAnn"
+     COMMENT="Paragraph Annotation Name"
+DEFAULT="parAnn"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+
+<PARAMETER NAME="paraStat"
+     COMMENT="Paragraph statistics"
+DEFAULT="para"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+
+<PARAMETER NAME="tokenStat"
+     COMMENT="Token statistics"
+DEFAULT="token"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+
+<PARAMETER NAME="sentStat"
+     COMMENT="Sentence statistics"
+DEFAULT="sent"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+
+
+<PARAMETER NAME="kindF"
+     COMMENT="Kind feature for filtering statistics"
+DEFAULT="kind"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="kindV"
+     COMMENT="Kind value for filtering statistics"
+DEFAULT="word"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+</RESOURCE>
+
+<RESOURCE>
+    <NAME>SUMMA Corpus IDF Table</NAME>
+    <CLASS>summa.resources.frequency.OnTheFlyInvertedTable</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+   <PARAMETER NAME="corpus"
+      COMMENT="The corpus to summarize"
+      RUNTIME="false">gate.Corpus</PARAMETER>
+<PARAMETER NAME="encoding"
+      COMMENT="table encoding"
+      DEFAULT="UTF-8"
+      RUNTIME="false">java.lang.String</PARAMETER>
+  <PARAMETER NAME="tableLocation"
+      COMMENT="location of table to save"
+      DEFAULT="resources/corpus.idf"
+      RUNTIME="false">java.net.URL</PARAMETER>
+<PARAMETER NAME="createTable" RUNTIME="false"
+DEFAULT="true">java.lang.Boolean</PARAMETER>
+<PARAMETER NAME="normalised" RUNTIME="false" DEFAULT="false">java.lang.Boolean</PARAMETER>
+ <PARAMETER NAME="inputAnnotationSet"
+      COMMENT="The annotation set where to find the fragment for token
+extraction"
+      RUNTIME="false">java.lang.String</PARAMETER>
+<PARAMETER NAME="inputAnnotationType"
+      COMMENT="The type for the fragment"
+      RUNTIME="false">java.lang.String</PARAMETER>
+<PARAMETER NAME="featureName"
+      COMMENT="The feature to use as term"
+      DEFAULT="string"
+      RUNTIME="false">java.lang.String</PARAMETER> 
+    <ICON>lr.gif</ICON>
+  </RESOURCE>
+
+<RESOURCE>
+ <NAME>SUMMA Extract Exporter</NAME>
+    <CLASS>summa.summarizer.ExportSelectedSentences</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to mark"
+       RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+  <PARAMETER NAME="dirName"
+      COMMENT="Where to export the summaries?"
+      RUNTIME="true">java.io.File</PARAMETER>
+<PARAMETER NAME="annotationSet"
+      COMMENT="What annotation set to extract from?"
+      DEFAULT="EXTRACT"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="annotationType"
+      COMMENT="What annotation want to extract?"
+      DEFAULT="Summary"
+      RUNTIME="true">java.lang.String</PARAMETER>
+</RESOURCE>
+
+
+<RESOURCE>
+      <NAME>SUMMA Simple Summarizer</NAME>
+      <CLASS>summa.SimpleSummarizer</CLASS>
+      <JAR>Summa_UPF.jar</JAR>
+      <COMMENT>Summarization Resources</COMMENT>
+      <PARAMETER NAME="document"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+<PARAMETER NAME="sumSetName" RUNTIME="true"
+DEFAULT="EXTRACT">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="sentAnn" RUNTIME="true"
+DEFAULT="Sentence">java.lang.String</PARAMETER>
+<PARAMETER NAME="sumFeatures" DEFAULT="first_sim;term_frequency;paragraph_score;position_score;title_sim;query_sim" RUNTIME="true" OPTIONAL="true">java.util.ArrayList</PARAMETER>
+      <PARAMETER NAME="sumWeigths"  RUNTIME="true"
+	DEFAULT="0.1;0.05;0.05;0.05;0.05;0.70"	 OPTIONAL="true">java.util.ArrayList</PARAMETER>
+<PARAMETER NAME="sentCompression" RUNTIME="true"
+OPTIONAL="true" DEFAULT="true">java.lang.Boolean</PARAMETER>
+      <PARAMETER NAME="compression" DEFAULT="20" RUNTIME="true" OPTIONAL="true">java.lang.Integer</PARAMETER>
+<PARAMETER NAME="newDocument" RUNTIME="true"
+DEFAULT="true">java.lang.Boolean</PARAMETER>   
+
+<PARAMETER NAME="scoreOnly" RUNTIME="true"
+DEFAULT="false">java.lang.Boolean</PARAMETER>   
+<PARAMETER NAME="annSetName"
+      COMMENT="The Annotation Set"
+DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="wordAnn"
+      COMMENT="Word annotation"
+      DEFAULT="Token"
+       RUNTIME="true">java.lang.String</PARAMETER>
+    </RESOURCE>
+
+
+
+<RESOURCE>
+    <NAME>SUMMA Sentence Term Frequency Scorer</NAME>
+    <CLASS>summa.scorer.SentenceTermFrequency</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+ <PARAMETER NAME="statFeature"
+      COMMENT="The feature to be used for computing frequencies"
+      DEFAULT="token_tf_idf"
+      RUNTIME="true">java.lang.String</PARAMETER>
+ 
+<PARAMETER NAME="annSetName"
+      COMMENT="The Annotation Set"
+      DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="wordAnn"
+      COMMENT="Word annotation"
+      DEFAULT="Token"
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="termFreqFeature"
+      COMMENT="Term frequency feature with score"
+      DEFAULT="tf_score"
+       RUNTIME="true">java.lang.String</PARAMETER>
+ </RESOURCE>
+
+<RESOURCE>
+    <NAME>SUMMA Term Frequency Filtering</NAME>
+    <CLASS>summa.resources.frequency.FilterTermFrequency</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+ <PARAMETER NAME="statFeature"
+      COMMENT="The feature to be used for computing frequencies"
+      DEFAULT="token_tf_idf"
+      RUNTIME="true">java.lang.String</PARAMETER>
+ <PARAMETER NAME="threshold"
+      COMMENT="The threshold for token filtering"
+      DEFAULT="10.0"
+      RUNTIME="true">java.lang.Double</PARAMETER>
+ 
+<PARAMETER NAME="annSetName"
+      COMMENT="The Annotation Set"
+      DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="wordAnn"
+      COMMENT="Word annotation"
+      DEFAULT="Token"
+       RUNTIME="true">java.lang.String</PARAMETER>
+
+ </RESOURCE>
+
+
+<RESOURCE>
+    <NAME>SUMMA Title/Sentence Similarity (VECTORS)</NAME>
+    <CLASS>summa.scorer.TitleSentenceSim</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+     <PARAMETER NAME="titleAnnSet"
+      COMMENT="Annotation Set"
+      DEFAULT="TITLE"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="titleFeature"
+      COMMENT="Name of title feature"
+      DEFAULT="title_sim"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence"
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="annSet"
+      COMMENT="The annotation set for sentences and tokens"
+      DEFAULT="DESCRIPTION"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="vector"
+      COMMENT="Vector for sentences"
+      DEFAULT="Vector_Norm"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+  </RESOURCE>
+
+<RESOURCE>
+    <NAME>SUMMA Sent/Sent Similarity</NAME>
+    <CLASS>summa.scorer.SentenceSentenceSim</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+
+  <PARAMETER NAME="annSet"
+      COMMENT="The Annotation Set"
+     DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="vecAnn"
+      COMMENT="Vector annotation"
+      DEFAULT="Vector"
+       RUNTIME="true">java.lang.String</PARAMETER>
+
+  </RESOURCE>
+
+
+
+<RESOURCE>
+    <NAME>SUMMA Query Method</NAME>
+    <CLASS>summa.scorer.QueryMethod</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+
+  <PARAMETER NAME="query"
+      COMMENT="Query"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+
+ 
+ <PARAMETER NAME="queryVec"
+      COMMENT="Vector_Norm"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence Annotation "
+      DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="querySet"
+      COMMENT="Query Annotation Set"
+      DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="annSet"
+      COMMENT="Document Annotation Set"
+      DEFAULT="Original markups"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="vecName"
+      COMMENT="Vectors"
+      DEFAULT="Vector_Norm"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="queryFeature"
+      COMMENT="Query Feature to Compute"
+      DEFAULT="query_sim"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+
+
+  </RESOURCE>
+
+
+
+<RESOURCE>
+    <NAME>SUMMA Random Scorer</NAME>
+    <CLASS>summa.scorer.RandomScorer</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+<PARAMETER NAME="annSetName"
+      COMMENT="The input annotation set"
+      DEFAULT=""
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+ </RESOURCE>
+
+<RESOURCE>
+    <NAME>SUMMA Position Scorer</NAME>
+    <CLASS>summa.scorer.PositionScorer</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+ <PARAMETER NAME="annSetName"
+      COMMENT="The input annotation set"
+      DEFAULT=""
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+
+  </RESOURCE>
+
+<RESOURCE>
+    <NAME>SUMMA Paragraph Scorer</NAME>
+    <CLASS>summa.scorer.ParagraphScorer</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+
+<PARAMETER NAME="annSetName"
+      COMMENT="The input annotation set"
+      DEFAULT=""
+       RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="sentAnn"
+      COMMENT="Sentence annotation"
+      DEFAULT="Sentence"
+       RUNTIME="true">java.lang.String</PARAMETER>
+
+
+
+<PARAMETER NAME="initial" COMMENT="Value for paragraph initial"
+RUNTIME="true"
+DEFAULT="1"
+OPTIONAL="true">java.lang.Double</PARAMETER>
+<PARAMETER NAME="middle" COMMENT="Value for middle paragraph"
+RUNTIME="true"
+DEFAULT="0.25"
+OPTIONAL="true">java.lang.Double</PARAMETER>
+<PARAMETER NAME="last" COMMENT="Value for paragraph final"
+RUNTIME="true"
+DEFAULT="0.5"
+OPTIONAL="true">java.lang.Double</PARAMETER>
+ <PARAMETER NAME="paraSet"
+      COMMENT="Annotation Set for Paragraphs"
+      DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="paraType"
+      COMMENT="Annotation Type for Paragraph"
+      DEFAULT="Paragraph"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+
+
+  </RESOURCE>
+
+
+<RESOURCE>
+    <NAME>SUMMA Endo Statistics</NAME>
+    <CLASS>summa.resources.frequency.EndoStatsPR</CLASS>
+    <JAR>Summa_UPF.jar</JAR>
+     <PARAMETER NAME="document"
+      COMMENT="The document to be analysed"
+      RUNTIME="true">gate.corpora.DocumentImpl</PARAMETER>
+     
+ <PARAMETER NAME="annSetName"
+     COMMENT="Annotation Set"
+     DEFAULT=""
+      RUNTIME="true">java.lang.String</PARAMETER>
+  <PARAMETER NAME="tokenAnn"
+     COMMENT="The token"
+DEFAULT="Token"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+     <PARAMETER NAME="tokenFeature"
+     COMMENT="Feature to compute statistics"
+DEFAULT="string"
+      RUNTIME="true">java.lang.String</PARAMETER>
+ <PARAMETER NAME="sentenceAnn"
+     COMMENT="Sentence Annotation Name"
+DEFAULT="Sentence"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+
+
+
+<PARAMETER NAME="tokenSent"
+     COMMENT="Token statistics at sentence"
+DEFAULT="token_sent"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="tokenIDF"
+     COMMENT="Token IDF"
+DEFAULT="token_idf"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+<PARAMETER NAME="tokenCount"
+     COMMENT="Token count"
+DEFAULT="token_count"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="docStat"
+     COMMENT="Document statistics"
+DEFAULT="doc_stat"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+
+
+<PARAMETER NAME="sentStat"
+     COMMENT="Sentence statistics"
+DEFAULT="sent"
+      RUNTIME="true">java.lang.String</PARAMETER>
+<PARAMETER NAME="ratioIDF"
+     COMMENT="Token IDF in document"
+DEFAULT="ratio_idf"
+      RUNTIME="true">java.lang.String</PARAMETER>
+
+</RESOURCE>
+
+
+
+
+
+
+</CREOLE>
+
+</CREOLE-DIRECTORY>

@@ -1,0 +1,91 @@
+<gate.util.persistence.GateApplication>
+  <urlList class="gate.util.persistence.CollectionPersistence">
+    <localList>
+      <gate.util.persistence.PersistenceManager-URLHolder>
+        <urlString>$gatehome$plugins/summa_plugin/</urlString>
+      </gate.util.persistence.PersistenceManager-URLHolder>
+      <gate.util.persistence.PersistenceManager-URLHolder>
+        <urlString>$gatehome$plugins/ANNIE/</urlString>
+      </gate.util.persistence.PersistenceManager-URLHolder>
+    </localList>
+    <collectionType>java.util.ArrayList</collectionType>
+  </urlList>
+  <application class="gate.util.persistence.ControllerPersistence">
+    <prList class="gate.util.persistence.CollectionPersistence">
+      <localList>
+        <gate.util.persistence.PRPersistence>
+          <runtimeParams class="gate.util.persistence.MapPersistence">
+            <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+            <localMap>
+              <entry>
+                <string>newDocument</string>
+                <boolean>true</boolean>
+              </entry>
+              <entry>
+                <string>sentCompression</string>
+                <boolean>true</boolean>
+              </entry>
+              <entry>
+                <string>annSet</string>
+                <string></string>
+              </entry>
+              <entry>
+                <string>corpus</string>
+                <null/>
+              </entry>
+              <entry>
+                <string>sentAnn</string>
+                <string>Sentence</string>
+              </entry>
+              <entry>
+                <string>vectorName</string>
+                <string>Vector_Norm</string>
+              </entry>
+              <entry>
+                <string>thresholdSim</string>
+                <double>0.05</double>
+              </entry>
+              <entry>
+                <string>sumSetName</string>
+                <string>MULTI-EXTRACT</string>
+              </entry>
+              <entry>
+                <string>removeRedundancy</string>
+                <boolean>true</boolean>
+              </entry>
+              <entry>
+                <string>compression</string>
+                <int>20</int>
+              </entry>
+              <entry>
+                <string>tokenAnn</string>
+                <string>Token</string>
+              </entry>
+            </localMap>
+          </runtimeParams>
+          <resourceType>summa.mds.SimpleMultiDocumentSummarizer</resourceType>
+          <resourceName>SUMMA Simple Multi-document Summarizer_00021</resourceName>
+          <initParams class="gate.util.persistence.MapPersistence">
+            <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+            <localMap/>
+          </initParams>
+          <features class="gate.util.persistence.MapPersistence">
+            <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+            <localMap/>
+          </features>
+        </gate.util.persistence.PRPersistence>
+      </localList>
+      <collectionType>java.util.ArrayList</collectionType>
+    </prList>
+    <resourceType>gate.creole.SerialController</resourceType>
+    <resourceName>MULTI-DOC-SUM</resourceName>
+    <initParams class="gate.util.persistence.MapPersistence">
+      <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+      <localMap/>
+    </initParams>
+    <features class="gate.util.persistence.MapPersistence">
+      <mapType>gate.util.SimpleFeatureMapImpl</mapType>
+      <localMap/>
+    </features>
+  </application>
+</gate.util.persistence.GateApplication>
